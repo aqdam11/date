@@ -93,41 +93,38 @@ let selectedDate="";
 
 function renderCalendar(){
 
-calendar.innerHTML="";
+    calendar.innerHTML="";
 
-monthYear.innerText=monthData[currentMonth].name;
+    monthYear.innerText=monthData[currentMonth].name;
 
-for(let i=0;i<monthData[currentMonth].start;i++){
+    for(let i=0;i<monthData[currentMonth].start;i++){
 
-const blank=document.createElement("div");
+        const blank=document.createElement("div");
+        blank.classList.add("empty");
+        calendar.appendChild(blank);
 
-calendar.appendChild(blank);
+    }
 
-}
+    for(let d=1;d<=monthData[currentMonth].days;d++){
 
-for(let d=1;d<=monthData[currentMonth].days;d++){
+        const day=document.createElement("div");
 
-const day=document.createElement("div");
+        day.innerHTML=d;
 
-day.innerText=d;
+        day.onclick=function(){
 
-day.onclick=function(){
+            document.querySelectorAll(".calendar-days div")
+            .forEach(e=>e.classList.remove("selected"));
 
-document
+            day.classList.add("selected");
 
-.querySelectorAll(".calendar-days div")
+            selectedDate=d+" "+monthData[currentMonth].name;
 
-.forEach(e=>e.classList.remove("selected"));
+        }
 
-day.classList.add("selected");
+        calendar.appendChild(day);
 
-selectedDate=d+" "+monthData[currentMonth].name;
-
-};
-
-calendar.appendChild(day);
-
-}
+    }
 
 }
 
